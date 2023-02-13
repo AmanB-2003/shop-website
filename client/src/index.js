@@ -4,13 +4,16 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider, Route, Outlet } from "react-router-dom";
+import Navbar from './components/Navbar/Navbar';
+import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Product from './pages/Product/Product';
 import Products from './pages/Products/Products';
+import "./index.scss";
 
 const Layout = () =>{
   return(
-    <div className='app'>
+    <div className="app">
       <Navbar />
       <Outlet />
       <Footer />
