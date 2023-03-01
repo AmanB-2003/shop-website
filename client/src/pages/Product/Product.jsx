@@ -3,7 +3,6 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
 import "./Product.scss";
-import AddShoppingCart from '@mui/icons-material/AddShoppingCart';
 
 function Product(){
     const [selectedImg, setSelectedImg] = useState(0);
@@ -23,7 +22,7 @@ function Product(){
                     <img src={images[1]} alt="" onClick={e=> setSelectedImg(1)} />
                 </div>
                 <div className='mainImg'>
-                    <img src={images[selectedImg]} />
+                    <img src={images[selectedImg]} alt="" />
                 </div>
             </div>
             <div className='right'>
