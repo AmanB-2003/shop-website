@@ -3,44 +3,59 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import BalanceIcon from "@mui/icons-material/Balance";
 import "./Product.scss";
+import useFetch from '../../hooks/useFetch';
+import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../../redux/cartReducer';
 
 function Product(){
-    const [selectedImg, setSelectedImg] = useState(0);
-    const [quantity, setQuantity] = useState(0);
+    const id = useParams().id;
+    const [selectedImg, setSelectedImg] = useState("img");
+    const [quantity, setQuantity] = useState(1);
 
-    const images = [
-        "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        "https://images.pexels.com/photos/2530790/pexels-photo-2530790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-    ];
+    const dispatch = useDispatch();
+
+    // const images = [
+    //     "https://images.pexels.com/photos/1926769/pexels-photo-1926769.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    //     "https://images.pexels.com/photos/2530790/pexels-photo-2530790.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+    // ];
+
+    //fetch product data (populate - to fetch images)
+    const {data, loading, error} = useFetch(`/products/${id}?populate=*`);
 
 
-    return(
+    return( loading? "loading..." : <div>
         <div className='product'>
             <div className='left'>
                 <div className='images'>
-                    <img src={images[0]} alt="" onClick={e=> setSelectedImg(0)} />
-                    <img src={images[1]} alt="" onClick={e=> setSelectedImg(1)} />
+                    <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img?.data?.attributes?.url} alt="" onClick={e=> setSelectedImg("img")} />
+                    <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes?.img2?.data?.attributes?.url} alt="" onClick={e=> setSelectedImg("img2")} />
                 </div>
                 <div className='mainImg'>
-                    <img src={images[selectedImg]} alt="" />
+                    <img src={process.env.REACT_APP_UPLOAD_URL + data?.attributes[selectedImg].data?.attributes?.url} alt="" />
                 </div>
             </div>
             <div className='right'>
-                <h1>Title</h1>
-                <span className='price'>$199</span>
-                <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum
-                suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan
-                lacus vel facilisis labore et dolore magna aliqua. Quis ipsum
-                suspendisse ultrices gravida. Risus commodo viverra maecenas.
-                </p>
+                <h1>{data?.attributes?.title}</h1>
+                <span className='price'>${data?.attributes?.price}</span>
+                <p>{data?.attributes?.desc}</p>
                 <div className='quantity'>
                     <button onClick={()=> setQuantity((prev)=> prev === 1 ? 1 : prev-1)}>-</button>
                     {quantity}
                     <button onClick={()=> setQuantity((prev)=> prev+1)} >+</button>
                 </div>
-                <button className='add'>
+
+                {/* // addToCart -- redux */}
+                <button className='add' onClick={()=>{dispatch(addToCart({
+                    id: data.id,
+                    title: data.attributes.title,
+                    desc: data.attributes.desc,
+                    price: data.attributes.price,
+                    quantity,
+                    img: data.attributes.img.data.attributes.url,
+                }));
+                setQuantity(1);
+                }}>
                     <AddShoppingCartIcon /> ADD TO CART
                 </button>
                 <div className='link'>
@@ -65,6 +80,7 @@ function Product(){
                 <span>FAQ</span>
             </div>
             </div>
+        </div>
         </div>
     );
 };

@@ -9,6 +9,10 @@ import Footer from './components/Footer/Footer';
 import Home from './pages/Home/Home';
 import Product from './pages/Product/Product';
 import Products from './pages/Products/Products';
+import {persistor, store} from './redux/store';
+import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
+
 import "./index.scss";
 
 const Layout = () =>{
@@ -46,7 +50,11 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <Provider store={store} >
+      <PersistGate loading={"loading"} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
+    </Provider>
   </React.StrictMode>
 );
 

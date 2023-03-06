@@ -7,10 +7,11 @@ import "./Products.scss";
 function Products(){
 
     const catId = parseInt(useParams().id)
-    const [maxPrice, setmaxPrice] = useState(1000);
+    const [maxPrice, setmaxPrice] = useState(5000);
     const [sort, setSort] = useState(null);
     const [selectedSubCats,setSelectedSubCats] = useState([]);
 
+    //fetch available subcategories
     const {data, loading, error} = useFetch(`/sub-categories?[filters][categories][id][$eq]=${catId}`);
     console.log(data);
 
@@ -39,7 +40,7 @@ function Products(){
                     <h2>Filter by Price</h2>
                     <div className='inputItem'>
                         <span>0</span>
-                        <input type="range" min={0} max={1000} onChange={(e)=> setmaxPrice(e.target.value)} ></input>
+                        <input type="range" min={0} max={5000} onChange={(e)=> setmaxPrice(e.target.value)} ></input>
                         <span>{maxPrice}</span>
                     </div>
                 </div>

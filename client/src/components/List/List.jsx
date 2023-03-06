@@ -1,6 +1,7 @@
 import React from 'react';
 import "./List.scss";
 import Card from '../Card/Card';
+import useFetch from '../../hooks/useFetch';
 
 // const data = [
 //     {
@@ -41,10 +42,29 @@ import Card from '../Card/Card';
 // ]
 
 function List({subCats, maxPrice, sort, catId}){
+    
+    //how to use useFetch conditionally????
+    // if(sort){
+    //     const {data, loading, error} = useFetch(`/products?populate=*&[filters][categories][id]=${catId}${subCats.map(
+    //         item=> `&[filters][sub_categories][id][$eq]=${item}`)}
+    //         &[filters][price][$lte]=${maxPrice}&sort=price:${sort}
+    //     `);
+    // }else{
+    //     const {data, loading, error} = useFetch(`/products?populate=*&[filters][categories][id]=${catId}${subCats.map(
+    //         item=> `&[filters][sub_categories][id][$eq]=${item}`)}
+    //     `);
+    // }
+
+    const {data, loading, error} = useFetch(`/products?populate=*&[filters][categories][id]=${catId}${subCats.map(
+        item=> `&[filters][sub_categories][id][$eq]=${item}`)}
+        &[filters][price][$lte]=${maxPrice}
+        ${ sort !== null ?`&sort=price:${sort}` : ``}`
+    );
+
     return(
         <div className='list'>
-        {/* {data.map(item=> 
-        ( <Card item={item} key={item.id} />)) } */}
+        {loading ? "loading" : data?.map(item=> 
+        ( <Card item={item} key={item.id} />)) }
         </div>
     )
 }
