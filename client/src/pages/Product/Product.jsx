@@ -12,6 +12,7 @@ function Product(){
     const id = useParams().id;
     const [selectedImg, setSelectedImg] = useState("img");
     const [quantity, setQuantity] = useState(1);
+    const [size, setSize] = useState("s");
 
     const dispatch = useDispatch();
 
@@ -21,6 +22,8 @@ function Product(){
     // ];
 
     //fetch product data (populate - to fetch images)
+
+
     const {data, loading, error} = useFetch(`/products/${id}?populate=*`);
 
 
@@ -39,6 +42,16 @@ function Product(){
                 <h1>{data?.attributes?.title}</h1>
                 <span className='price'>${data?.attributes?.price}</span>
                 <p>{data?.attributes?.desc}</p>
+                <div className='size'>
+                {Object.entries(data?.attributes?.sizes).map(([key, val], i) => (
+                    <div className='sizes' id={i}>
+                        <input type="radio" id={key} name="size" value={key} onClick={()=> {setSize(key); console.log(size);}}/>
+                        <label htmlFor={key}>{key}</label>
+                    </div>
+
+))}
+                </div>
+                
                 <div className='quantity'>
                     <button onClick={()=> setQuantity((prev)=> prev === 1 ? 1 : prev-1)}>-</button>
                     {quantity}
@@ -51,6 +64,7 @@ function Product(){
                     title: data.attributes.title,
                     desc: data.attributes.desc,
                     price: data.attributes.price,
+                    size,
                     quantity,
                     img: data.attributes.img.data.attributes.url,
                 }));

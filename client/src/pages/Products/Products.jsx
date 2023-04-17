@@ -2,17 +2,18 @@ import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import List from '../../components/List/List';
 import useFetch from '../../hooks/useFetch';
+import Image from './Image';
 import "./Products.scss";
 
 function Products(){
 
-    const catId = parseInt(useParams().id)
-    const [maxPrice, setmaxPrice] = useState(5000);
+    const catId = useParams().id;
+    const [maxPrice, setmaxPrice] = useState(1000);
     const [sort, setSort] = useState(null);
     const [selectedSubCats,setSelectedSubCats] = useState([]);
 
     //fetch available subcategories
-    const {data, loading, error} = useFetch(`/sub-categories?[filters][categories][id][$eq]=${catId}`);
+    const {data, loading, error} = useFetch(`/sub-categories?filters[categories][UID][$eq]=${catId}`);
     console.log(data);
 
     const handleChange = (e) =>{
@@ -40,7 +41,7 @@ function Products(){
                     <h2>Filter by Price</h2>
                     <div className='inputItem'>
                         <span>0</span>
-                        <input type="range" min={0} max={5000} onChange={(e)=> setmaxPrice(e.target.value)} ></input>
+                        <input type="range" min={0} max={1000} onChange={(e)=> setmaxPrice(e.target.value)} ></input>
                         <span>{maxPrice}</span>
                     </div>
                 </div>
@@ -57,8 +58,7 @@ function Products(){
                 </div>
             </div>
             <div className='right'>
-            <img className="catImg"
-            src="https://images.pexels.com/photos/1074535/pexels-photo-1074535.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" />
+            <Image catId={catId}></Image>
             <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
             </div>
         </div>

@@ -60,6 +60,7 @@ const Cart = ()=> {
                 <h1>{item.title}</h1>
                 <p>{item.desc && item.desc.substring(0,100)}</p>
                 <div className="price">${item.quantity} x {item.price}</div>
+                <p>{item.size}</p>
             </div>
             <DeleteOutlinedIcon className="delete" onClick={()=>dispatch(removeItem(item.id))} />
         </div>

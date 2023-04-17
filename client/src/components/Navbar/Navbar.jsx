@@ -25,13 +25,13 @@ function Navbar(){
                         <span>USD</span>
                     </div>
                     <div className="item">
-                        <Link className='link' to="products/1">Women</Link>
+                        <Link className='link' to="products/tops">Women</Link>
                     </div>
                     <div className="item">
-                        <Link className='link' to="products/2">Men</Link>
+                        <Link className='link' to="products/2">Trending</Link>
                     </div>
                     <div className="item">
-                        <Link className='link' to="products/3">Kids</Link>
+                        <Link className='link' to="products/3">Sale</Link>
                     </div>
                 </div>
 

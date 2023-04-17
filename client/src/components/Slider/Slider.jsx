@@ -23,7 +23,7 @@ const Slider = () => {
     return (
         <div className="slider">
             <div className="container" style={{transform: `translateX(-${currentSlide*100}vw)`}}>
-                <img src={data[0]} alt="" ></img>
+                <img src="/img/pexels-moo-jii-5591912.jpg" alt="" ></img>
                 <img src={data[1]} alt="" ></img>
                 <img src={data[2]} alt="" ></img>
             </div>
