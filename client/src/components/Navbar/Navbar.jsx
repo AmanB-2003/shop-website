@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom';
 import "./Navbar.scss";
 import { useSelector } from "react-redux";
 import Cart from '../Cart/Cart';
+import '../../fonts/goldoni.regular.otf';
 
 
 function Navbar(){
@@ -41,17 +42,17 @@ function Navbar(){
 
                 <div className="right">
                     <div className="item">
-                        <Link className='link' to="/">Homepage</Link>
+                        <Link className='link' to="/">Home</Link>
                     </div>
                     <div className="item">
                         <Link className='link' to="/">About</Link>
                     </div>
                     <div className="item">
-                        <Link className='link' to="/">Contact</Link>
+                        <Link className='link' to="/">Blog</Link>
                     </div>
                     <div className="icons">
                         <SearchIcon />
-                        <PersonOutlineOutlined />
+                        <Link className='link' to="/user"><PersonOutlineOutlined /></Link>
                         <FavoriteBorderOutlinedIcon />
                         <div className="cartIcon" onClick={()=> setOpen(!open)}  >
                             <ShoppingCartOutlinedIcon />

@@ -12,15 +12,23 @@ import Products from './pages/Products/Products';
 import {persistor, store} from './redux/store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react'
-
+import AuthProvider from "./components/AuthProvider/AuthProvider";
+import './fonts/ZonaPro-Bold.otf';
+import "./fonts/ZonaPro-ExtraLight.otf";
+import Signup from './pages/Authentication/Signup';
+import Login from './pages/Authentication/Login';
 import "./index.scss";
+import UserDetails from './pages/User/UserDetails';
+import ScrollToTop from './components/ScrollToTop';
+
 
 const Layout = () =>{
   return(
     <div className="app">
-      <Navbar />
-      <Outlet />
-      <Footer />
+      <ScrollToTop />
+        <Navbar />
+        <Outlet />
+        <Footer />
     </div>
   )
 }
@@ -42,6 +50,19 @@ const router = createBrowserRouter([
         path: "/product/:id",
         element:<Product />
       },
+      {
+        path: "/register",
+        element:<Signup />
+      },
+      {
+        path: "/login",
+        element:<Login />
+      },
+      {
+        path: "/user",
+        element:<UserDetails />
+      },
+
     ]
   },
 ])  
@@ -52,7 +73,9 @@ root.render(
   <React.StrictMode>
     <Provider store={store} >
       <PersistGate loading={"loading"} persistor={persistor}>
-        <RouterProvider router={router} />
+      <AuthProvider>
+          <RouterProvider router={router} />
+      </AuthProvider>
       </PersistGate>
     </Provider>
   </React.StrictMode>

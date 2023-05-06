@@ -1,3 +1,10 @@
+@font-face {
+  font-family: "godoni";
+  src: local("godonireg"),
+  url("../../fonts/goldoni.regular.otf") format("truetype");
+  font-weight: bold;
+}
+
 .footer {
     margin: 100px 200px 20px 200px;
   
@@ -35,7 +42,7 @@
         align-items: center;
   
         .logo{
-          color: #2879fe;
+          font-family: 'godoni';
           font-weight: bold;
           font-size: 24px;
         }

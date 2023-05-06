@@ -1,5 +1,6 @@
 import React from "react";
 import "./Footer.scss";
+import '../../fonts/goldoni.regular.otf';
 
 const Footer = () => {
   return (
@@ -8,9 +9,9 @@ const Footer = () => {
         <div className="item">
           <h1>Categories</h1>
           <span>Women</span>
-          <span>Men</span>
-          <span>Shoes</span>
-          <span>Accessories</span>
+          <span>Tops</span>
+          <span>Bottoms</span>
+          <span>Dresses</span>
           <span>New Arrivals</span>
         </div>
         <div className="item">
@@ -43,7 +44,7 @@ const Footer = () => {
 
       <div className="bottom">
         <div className="left">
-          <span className="logo">Dambrie</span>
+          <span className="logo">DAMBRIE</span>
           <span className="copyright">
             © Copyright 2023. All Rights Reserved
           </span>

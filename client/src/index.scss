@@ -1,4 +1,19 @@
+@font-face {
+    font-family: "zona-bold";
+    src: local("zona"),
+    url("./fonts/ZonaPro-Bold.otf") format("truetype");
+}
+
+@font-face {
+    font-family: "zona-light";
+    src: local("zona"),
+    url("./fonts/ZonaPro-ExtraLight.otf") format("truetype");
+}
+
+$base-color:  #DFC5FE;
+
 .app{
+    font-family: 'montserrat';
 
     .link{
         color: inherit;

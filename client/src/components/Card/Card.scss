@@ -44,23 +44,23 @@
     h2{
         color: black;
         font-size: 16px;
-        font-weight: 400;
+        font-weight: 500;
     }
 
     .prices{
         display: flex;
         gap: 20px;
 
+        p{
+            color: gray;
+            text-decoration: line-through;
+        }
+
         h3{
             color: black;
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 500;
             margin-top: 0px;
-
-            &:first-child{
-                color: gray;
-                text-decoration: line-through;
-            }
         }
     }
 }

@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useState , useEffect } from 'react';
+import { useParams, useLocation } from 'react-router-dom';
 import List from '../../components/List/List';
 import useFetch from '../../hooks/useFetch';
 import Image from './Image';
@@ -30,7 +30,7 @@ function Products(){
         <div className='products'>
             <div className='left'>
                 <div className='filterItem'>
-                    <h2>Product Categories</h2>
+                    <h3>Product Categories</h3>
                     {data?.map(item => (<div className='inputItem' key={item.id}>
                         <input type="checkbox" id="1" value={item.id} onChange={handleChange}></input>
                         <label htmlFor={item.id}>{item.attributes.title}</label>
@@ -38,7 +38,7 @@ function Products(){
                     
                 </div>
                 <div className='filterItem'>
-                    <h2>Filter by Price</h2>
+                    <h3>Filter by Price</h3>
                     <div className='inputItem'>
                         <span>0</span>
                         <input type="range" min={0} max={1000} onChange={(e)=> setmaxPrice(e.target.value)} ></input>
@@ -46,7 +46,7 @@ function Products(){
                     </div>
                 </div>
                 <div className='filterItem'>
-                    <h2>Sort by</h2>
+                    <h3>Sort by</h3>
                     <div className='inputItem'>
                         <input type="radio" id="asc" value="asc" name="price" onChange={e => setSort("asc") } ></input>
                         <label htmlFor='desc'>Price {"Lowest first"}</label>
@@ -58,7 +58,7 @@ function Products(){
                 </div>
             </div>
             <div className='right'>
-            <Image catId={catId}></Image>
+            {/* <Image catId={catId}></Image> */}
             <List catId={catId} maxPrice={maxPrice} sort={sort} subCats={selectedSubCats}/>
             </div>
         </div>
